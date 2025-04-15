@@ -1,17 +1,13 @@
-import numpy as np
-from transformers import BertTokenizer
-import torch
-from torch.utils.data import  DataLoader
 import os
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-import seaborn as sns
 import json
 import torch
-from sklearn.metrics import confusion_matrix, classification_report
 import numpy as np
-from operations.dataset_loader_ops import DatasetLoader
+import seaborn as sns
+import matplotlib.pyplot as plt
+from transformers import BertTokenizer
+from torch.utils.data import  DataLoader
+from sklearn.metrics import confusion_matrix, classification_report
+from operations.dataset_ops.dataset_loader_ops import DatasetLoader
 from utils.constants import DEVICE_TYPE, BATCH_SIZE, INFERENCE_FILE_PATH
 
 

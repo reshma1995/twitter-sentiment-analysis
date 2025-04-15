@@ -3,10 +3,10 @@ import torch
 import torch.nn as nn
 from utils.helper_utils import set_seed
 from utils.model_utils import load_data,configure_model
-from operations.dataset_ops import create_and_load_dataset
+from operations.dataset_ops.dataset_ops import create_and_load_dataset
 from utils.constants import SPLIT_DATA_FILEPATH, BATCH_SIZE, DEVICE_TYPE, MODEL_SAVE_PATH, NUM_EPOCHS
 from transformers import BertTokenizer
-from operations.dataset_loader_ops import DatasetLoader
+from operations.dataset_ops.dataset_loader_ops import DatasetLoader
 from torch.utils.data import DataLoader
 from operations.model_ops.train_model import EarlyStopping, train
 from operations.inference_ops.inference import infer

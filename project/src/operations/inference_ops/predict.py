@@ -6,7 +6,7 @@ from operations.model_ops.cnn import CNN_Model
 from operations.model_ops.lstm_multihead import LSTM_Multi_Head_Attention
 from operations.model_ops.lstm_text_classifier import LSTM_Text_Classifier
 from operations.model_ops.mlp_classifier import MLP_Classifier
-from operations.dataset_ops import CleanTweets
+from operations.dataset_ops.dataset_ops import CleanTweets
 
 def predict(input_text, model):
     input_text = [input_text]
