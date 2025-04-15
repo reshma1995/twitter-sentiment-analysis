@@ -52,5 +52,15 @@ def main():
         except FileNotFoundError:
             raise Exception("Model file not found. Ensure the model has been trained and saved.")
 
+    elif args.predict:
+        input_text = input('Enter the tweet for sentiment analysis: ')
+        model_name = input('Enter the model you want to use for prediction: ')
+        predictions = predict(input_text, model_name)
+        pred_dict = {0: 'Angry', 1:'Disappointed', 2:'Happy'}
+        model_pred = pred_dict[int(predictions)]
+
+    else:
+        print("Unknown argument")
+
 if __name__ == '__main__':
     main()

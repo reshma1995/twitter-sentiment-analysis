@@ -80,7 +80,7 @@ def infer(model, model_name, loss_fn, file_name):
     test_dataset = DatasetLoader(test_texts, test_labels,tokenizer)
     print("Number of records in test set is: ", len(test_dataset))
     num_cpus = os.cpu_count()
-    test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE,num_workers=num_cpus)
+    test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, num_workers=num_cpus)
     os.makedirs(os.path.dirname(INFERENCE_FILE_PATH), exist_ok=True)
     _, avg_accuracy, attention_weights, cm, cr = inference(model, model_name, test_loader, loss_fn, DEVICE_TYPE)
     print("Accuracy: ", avg_accuracy)
