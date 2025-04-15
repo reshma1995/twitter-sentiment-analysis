@@ -27,10 +27,10 @@ def init_model(model_name, model_parameters, learning_rate=0.01, rho=0.95):
     Initializes a model and its optimizer.
     
     Args:
-    - model_name: The class name of the model to be initialized.
-    - model_parameters (dict): Parameters to be passed to the model's constructor.
-    - learning_rate (float): Learning rate for the optimizer.
-    - rho (float): Rho parameter for RMSprop optimizer.
+    @model_name: The class name of the model to be initialized.
+    @model_parameters (dict): Parameters to be passed to the model's constructor.
+    @learning_rate (float): Learning rate for the optimizer.
+    @rho (float): Rho parameter for RMSprop optimizer.
     
     Returns:
     Tuple of (model, optimizer).

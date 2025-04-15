@@ -4,6 +4,7 @@ from utils.constants import CONFIG_PARAMS_FILEPATH
 from operations.model_ops.cnn import CNN_Model
 from operations.model_ops.lstm_text_classifier import LSTM_Text_Classifier
 from operations.model_ops.lstm_multihead import LSTM_Multi_Head_Attention
+from operations.model_ops.mlp_classifier import MLP_Classifier
 
 def load_data(json_path):
     """
@@ -22,7 +23,7 @@ def configure_model(args, vocab_size):
     model_class = {
         'CNN_Model': CNN_Model,
         'LSTM_Text_Classifier': LSTM_Text_Classifier,
-        # 'MLPClassifier': MLPClassifier,
+        'MLPClassifier': MLP_Classifier,
         'LSTM_Multi_Head_Attention': LSTM_Multi_Head_Attention
     }.get(args.model_name, CNN_Model)
     
