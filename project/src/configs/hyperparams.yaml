@@ -1,4 +1,4 @@
-CNNModel:
+CNN_Model:
   embed_dim: 128
   filter_sizes:
     - 3
@@ -11,7 +11,7 @@ CNNModel:
   num_classes: 3
   dropout: 0.5
 
-LSTMTextClassifier:
+LSTM_Text_Classifier:
   n_layers: 6
   bidirectional: true
   dropout: 0.5
@@ -19,12 +19,12 @@ LSTMTextClassifier:
   hidden_dim: 128
   output_dim: 3
   
-MLPClassifier:
+MLP_Classifier:
   num_classes: 3
   hidden_size: 2048
   input_dim: 128
   
-LSTMMultiHeadAttention:
+LSTM_Multi_Head_Attention:
   num_layers: 6
   bidirectional: true
   num_heads: 8
