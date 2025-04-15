@@ -23,7 +23,7 @@ def configure_model(args, vocab_size):
     model_class = {
         'CNN_Model': CNN_Model,
         'LSTM_Text_Classifier': LSTM_Text_Classifier,
-        'MLPClassifier': MLP_Classifier,
+        'MLP_Classifier': MLP_Classifier,
         'LSTM_Multi_Head_Attention': LSTM_Multi_Head_Attention
     }.get(args.model_name, CNN_Model)
     
