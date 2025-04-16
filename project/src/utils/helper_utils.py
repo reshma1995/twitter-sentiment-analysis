@@ -17,10 +17,11 @@ def read_config_file(file_name,model_name):
                     model_parameters = data[model_name]
             else:
                 model_parameters = data
+            return model_parameters
     except Exception as e:
         print(e)
         model_parameters = {}
-    return model_parameters
+        return model_parameters
 
 def init_model(model_name, model_parameters, learning_rate=0.01, rho=0.95):
     """
