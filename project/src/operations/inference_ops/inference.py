@@ -11,7 +11,7 @@ from operations.dataset_ops.dataset_loader_ops import DatasetLoader
 from utils.constants import DEVICE_TYPE, BATCH_SIZE, INFERENCE_FILE_PATH
 
 
-def inference(model, model_name, test_loader, loss_fn, device=DEVICE_TYPE):
+def inference(model, test_loader, loss_fn, device=DEVICE_TYPE):
     """
     Function to make inference of the trained model. The function will display the classification report and also 
     the accuracy of each of the model
@@ -42,23 +42,6 @@ def inference(model, model_name, test_loader, loss_fn, device=DEVICE_TYPE):
     return avg_loss, avg_accuracy, average_attention_weights, cm, cr
 
 
-def plot_attention_heatmap(tokens, attention_weights, cmap='viridis'):
-    num_heads = len(attention_weights)
-    fig, axs = plt.subplots(1, num_heads, figsize=(30, 10))
-    for i, ax in enumerate(axs):
-        weights = attention_weights[i].cpu().squeeze().numpy()
-        normalized_weights = weights / np.max(weights)
-        ax.bar(range(len(tokens)), normalized_weights, alpha=0.7)
-        ax.set_xticks(range(len(tokens)))
-        ax.set_xticklabels(tokens, rotation=90)
-        ax.set_ylabel('Attention Weights')
-        ax.set_title(f'Head {i+1}')
-        ax.set_ylim(0, 1)
-        
-    plt.tight_layout()
-    plt.show()
-
-
 def infer(model, model_name, loss_fn, file_name):
     try:
         with open(file_name, 'r', encoding='utf-8') as f:
@@ -78,7 +61,7 @@ def infer(model, model_name, loss_fn, file_name):
     num_cpus = os.cpu_count()
     test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, num_workers=num_cpus)
     os.makedirs(os.path.dirname(INFERENCE_FILE_PATH), exist_ok=True)
-    _, avg_accuracy, attention_weights, cm, cr = inference(model, model_name, test_loader, loss_fn, DEVICE_TYPE)
+    _, avg_accuracy, attention_weights, cm, cr = inference(model, test_loader, loss_fn, DEVICE_TYPE)
     print("Accuracy: ", avg_accuracy)
     plt.figure(figsize=(10, 7))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=True, yticklabels=True)

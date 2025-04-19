@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 import string
 from tqdm import tqdm
 import os
-# from transformers import BertTokenizer
 from sklearn.model_selection import train_test_split
 from utils.constants import PREPROCESSED_DATA_PATH, CLEANED_FILE_NAME, DATSET_FILEPATH
 from utils.helper_utils import set_seed

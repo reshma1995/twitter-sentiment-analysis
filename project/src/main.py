@@ -10,6 +10,7 @@ from operations.dataset_ops.dataset_loader_ops import DatasetLoader
 from torch.utils.data import DataLoader
 from operations.model_ops.train_model import EarlyStopping, train
 from operations.inference_ops.inference import infer
+from operations.inference_ops.predict import predict
 
 def main():
     set_seed(2023)
@@ -58,7 +59,7 @@ def main():
         predictions = predict(input_text, model_name)
         pred_dict = {0: 'Angry', 1:'Disappointed', 2:'Happy'}
         model_pred = pred_dict[int(predictions)]
-
+        print("Prediction: ", model_pred)
     else:
         print("Unknown argument")
 
