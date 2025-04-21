@@ -32,3 +32,16 @@ LSTM_Multi_Head_Attention:
   input_dim: 128
   hidden_dim: 128
   output_dim: 3
+
+RCNN_Text_Classifier:
+  embedding_dim: 128
+  hidden_dim: 128
+  output_dim: 3
+  dropout: 0.5
+
+BiGRU_Attention_Residual:
+  embedding_dim: 128
+  hidden_dim: 128
+  output_dim: 3
+  n_layers: 2
+  dropout: 0.5

@@ -5,6 +5,8 @@ from operations.model_ops.cnn import CNN_Model
 from operations.model_ops.lstm_text_classifier import LSTM_Text_Classifier
 from operations.model_ops.lstm_multihead import LSTM_Multi_Head_Attention
 from operations.model_ops.mlp_classifier import MLP_Classifier
+from operations.model_ops.rcnn_text_classifier import RCNN_Text_Classifier
+from operations.model_ops.bigru_attention_residuals import BiGRU_Attention_Residual
 
 def load_data(json_path):
     """
@@ -24,7 +26,9 @@ def configure_model(args, vocab_size):
         'CNN_Model': CNN_Model,
         'LSTM_Text_Classifier': LSTM_Text_Classifier,
         'MLP_Classifier': MLP_Classifier,
-        'LSTM_Multi_Head_Attention': LSTM_Multi_Head_Attention
+        'LSTM_Multi_Head_Attention': LSTM_Multi_Head_Attention,
+        'RCNN_Text_Classifier': RCNN_Text_Classifier,
+        'BiGRU_Attention_Residual': BiGRU_Attention_Residual
     }.get(args.model_name, CNN_Model)
     
     model_params = read_config_file(CONFIG_PARAMS_FILEPATH, args.model_name)
