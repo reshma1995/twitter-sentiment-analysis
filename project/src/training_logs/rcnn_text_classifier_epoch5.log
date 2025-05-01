@@ -1,0 +1,16 @@
+=========Starting Training==========
+ Epoch  |  Train Loss  |  Val Loss  |  Val Acc  |  Elapsed 
+------------------------------------------------------------
+Validation loss decreased (inf --> 0.564446).  Saving model ...
+   1    |   0.687534   |  0.564446  |   75.31   |  303.93  
+Validation loss decreased (0.564446 --> 0.501064).  Saving model ...
+   2    |   0.567070   |  0.501064  |   79.15   |  308.98  
+Validation loss decreased (0.501064 --> 0.441617).  Saving model ...
+   3    |   0.501542   |  0.441617  |   82.53   |  305.47  
+Validation loss decreased (0.441617 --> 0.385920).  Saving model ...
+   4    |   0.441525   |  0.385920  |   85.18   |  307.56  
+Validation loss decreased (0.385920 --> 0.344263).  Saving model ...
+   5    |   0.393824   |  0.344263  |   86.73   |  305.85  
+
+
+==========Best Accuracy After training================ 86.72955322265625
