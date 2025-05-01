@@ -3,3 +3,4 @@ project/src/dataset/raw/dataset(clean).csv filter=lfs diff=lfs merge=lfs -text
 project/src/dataset/processed/cleaned_tweets.csv filter=lfs diff=lfs merge=lfs -text
 project/src/dataset/processed/split_data.json filter=lfs diff=lfs merge=lfs -text
 project/notebooks/models/MLP_Classifier_epoch_1 filter=lfs diff=lfs merge=lfs -text
+project/src/models_5_epochs/MLP_Classifier filter=lfs diff=lfs merge=lfs -text
