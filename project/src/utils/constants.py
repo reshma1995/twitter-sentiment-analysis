@@ -8,10 +8,7 @@ if torch.backends.mps.is_available():
 else:
     DEVICE_TYPE = "cpu"
 
-EMBEDDINGS_DIM = 256
 MAX_SEQ_LEN = 120
-MODELS_BASE_DIR = 'models/'
-PLOTTING_BASE_DIR = 'plots/'
 NUM_EPOCHS = 50
 BATCH_SIZE = 128
 

@@ -1,5 +1,6 @@
 import argparse
 import torch
+import numpy as np
 import torch.nn as nn
 from utils.helper_utils import set_seed
 from utils.model_utils import load_data,configure_model
@@ -8,6 +9,7 @@ from utils.constants import SPLIT_DATA_FILEPATH, BATCH_SIZE, DEVICE_TYPE, MODEL_
 from transformers import BertTokenizer
 from operations.dataset_ops.dataset_loader_ops import DatasetLoader
 from torch.utils.data import DataLoader
+from sklearn.utils.class_weight import compute_class_weight
 from operations.model_ops.train_model import EarlyStopping, train
 from operations.inference_ops.inference import infer
 from operations.inference_ops.predict import predict
@@ -37,16 +39,24 @@ def main():
         train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
         valid_loader = DataLoader(valid_dataset, batch_size=BATCH_SIZE)
         model, optimizer = configure_model(args, tokenizer.vocab_size)
-        loss_fn = nn.CrossEntropyLoss()
+        train_labels = np.argmax(data["train_labels"], axis=1)
+        valid_labels = np.argmax(data["valid_labels"], axis=1)
+        class_weights = compute_class_weight(
+            class_weight='balanced',
+            classes=np.unique(train_labels),
+            y=train_labels
+        )
+        class_weights_tensor = torch.tensor(class_weights, dtype=torch.float).to(DEVICE_TYPE)
+        loss_fn = nn.CrossEntropyLoss(weight=class_weights_tensor)
         model.to(DEVICE_TYPE)
-        early_stopping = EarlyStopping(patience=3, verbose=True)
+        early_stopping = EarlyStopping(patience=3, verbose=True, delta=0.001)
         train(model, optimizer, train_loader, valid_loader, loss_fn, epochs=NUM_EPOCHS, model_save_path=f'{MODEL_SAVE_PATH}/{args.model_name}', early_stopping=early_stopping)
 
     elif args.infer_model:
         tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         model, _ = configure_model(args, tokenizer.vocab_size)
         try:
-            model.load_state_dict(torch.load(f'models/{args.model_name}'))
+            model.load_state_dict(torch.load(f'{MODEL_SAVE_PATH}/{args.model_name}'))
             model.to(DEVICE_TYPE)
             loss_fn = nn.CrossEntropyLoss()
             infer(model, args.model_name, loss_fn, SPLIT_DATA_FILEPATH)
