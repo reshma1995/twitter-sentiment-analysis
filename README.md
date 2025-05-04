@@ -31,7 +31,7 @@ This README provides clear instructions on how to install dependencies, how to r
 
 5. RCNN Text Classifier:
     - Embedding Dimension: 128
-    - Recurrent Layer: LSTM or GRU layer to capture sequential features
+    - Recurrent Layer: LSTM layer to capture sequential features
     - Convolutional Layer: Extracts local patterns from recurrent outputs
     - Dropout: 0.5
     - Output Layer: Dense layer mapping to 3 sentiment classes
