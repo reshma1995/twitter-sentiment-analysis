@@ -104,39 +104,39 @@ The following are the available model_name arguments:
 ## Project Organization
 ------------
 
-    ├── LICENSE
-    ├── README.md   <- The top-level README for developers using this project.
-    ├── project     <- All the source code/notebooks/figures
-    │   ├── notebooks <- Jupyter notebooks
+    ├── LICENSE                             <- Project Liscense
+    ├── README.md                           <- The top-level README for developers using this project.
+    ├── project                             <- All the source code/notebooks/figures
+    │   ├── notebooks                       <- Jupyter notebooks
     │   │   ├── data_analysis.ipynb
     │   │   ├── data_preprocessing.ipynb
     │   │   ├── inference_and_predictions.ipynb
-    │   │   ├── models  <- Models trained for 1 Epoch
+    │   │   ├── models                      <- Models trained for 1 Epoch
     │   │   │   ├── CNN_Model_epoch_1
     │   │   │   ├── LSTM_Multi_Head_Attention_epoch_1
     │   │   │   ├── LSTM_Text_Classifier_epoch_1
     │   │   │   ├── MLP_Classifier_epoch_1
     │   │   │   └── RCNN_Text_Classifier_epoch_1
     │   │   └── training.ipynb
-    │   ├── requirements.txt
-    │   ├── setup.py
+    │   ├── requirements.txt                <- Dependencies
+    │   ├── setup.py                        <- Setup File
     │   └── src
     │       ├── __init__.py
-    │       ├── classification_table.py
+    │       ├── classification_table.py     <- Visualisation for precision, recall & F1 score
     │       ├── configs
-    │       │   └── hyperparams.yaml
+    │       │   └── hyperparams.yaml        <- H Params
     │       ├── dataset
-    │       │   ├── processed  <- The final, canonical data sets for modeling.
-    │       │   └── raw        <- The original, immutable data dump.
-    │       ├── main.py
-    │       ├── models         <- Models trained for 50 Epochs or Early Stopping
+    │       │   ├── processed               <- The final, canonical data sets for modeling.
+    │       │   └── raw                     <- The original, immutable data dump.
+    │       ├── main.py                     <- Entrypoint
+    │       ├── models                      <- Models trained for 50 Epochs or Early Stopping
     │       │   ├── BiGRU_Attention_Residual
     │       │   ├── CNN_Model
     │       │   ├── LSTM_Multi_Head_Attention
     │       │   ├── LSTM_Text_Classifier
     │       │   ├── MLP_Classifier
     │       │   └── RCNN_Text_Classifier
-    │       ├── models_5_epochs <- Models trained for 5 Epochs or Early Stopping     
+    │       ├── models_5_epochs             <- Models trained for 5 Epochs or Early Stopping     
     │       │   ├── CNN_Model
     │       │   ├── LSTM_Multi_Head_Attention
     │       │   ├── LSTM_Text_Classifier
@@ -144,38 +144,38 @@ The following are the available model_name arguments:
     │       │   └── RCNN_Text_Classifier
     │       ├── operations
     │       │   ├── __init__.py
-    │       │   ├── dataset_ops     <- Dataset operations
+    │       │   ├── dataset_ops              <- Dataset operations
     │       │   │   ├── __init__.py
-    │       │   │   ├── dataset_loader_ops.py
-    │       │   │   └── dataset_ops.py 
+    │       │   │   ├── dataset_loader_ops.py  <- Dataset loader scripts
+    │       │   │   └── dataset_ops.py         <- Dataset cleaning scripts
     │       │   ├── inference_ops
     │       │   │   ├── __init__.py
-    │       │   │   ├── inference.py  <- Scripts to infer models and gen. confusion matrix
-    │       │   │   └── predict.py    <- Scripts to predict using trained models
+    │       │   │   ├── inference.py         <- Scripts to infer models and gen. confusion matrix
+    │       │   │   └── predict.py           <- Scripts to predict using trained models
     │       │   └── model_ops
     │       │       ├── __init__.py
     │       │       ├── bigru_attention_residuals.py<- BiGRU Attention Residual Model
     │       │       ├── cnn.py                      <- CNN Model
     │       │       ├── lstm_multihead.py           <- BiLSTM Multi Head Attention Model
     │       │       ├── lstm_text_classifier.py     <- BiLSTM Model
-    │       │       ├── mlp_classifier.py           <- MLP Classifier
-    │       │       ├── rcnn_text_classifier.py     <- RCNN (LSTM + CNN)
-    │       │       └── train_model.py  <- Scripts to train models
-    │       ├── reports <- Confusion Matrices and Loss Curve Images
-    │       │   └── figures
-    │       ├── training_logs   <- Logs for different EPOCH trainings
-    │       ├── utils           <- Helper functions and classes
-    │       │   ├── constants.py  <- Constant Declarations
-    │       │   ├── helper_utils.py
-    │       │   └── model_utils.py
-    │       └── visualizations  <- Scripts to create loss curve visualizations
+    │       │       ├── mlp_classifier.py           <- MLP Classifier Model
+    │       │       ├── rcnn_text_classifier.py     <- RCNN (LSTM + CNN) Model
+    │       │       └── train_model.py              <- Scripts to train models
+    │       ├── reports                             <- Confusion Matrices and Loss Curve Images
+    │       │   └── figures                         <- Images of Loss curves and confusion matrix
+    │       ├── training_logs                       <- Logs for different EPOCH trainings
+    │       ├── utils                               <- Helper functions and classes
+    │       │   ├── constants.py                    <- Constant Declarations
+    │       │   ├── helper_utils.py                 <- Helper functions & declarations
+    │       │   └── model_utils.py                  <- Helper functions & declarations for models
+    │       └── visualizations                      <- Scripts to create loss curve visualizations
     │           ├── bigru_attention_residual_vis.py
     │           ├── cnn_vis.py
     │           ├── lstm_multihead_attention_vis.py
     │           ├── lstm_text_classifier_vis.py
     │           ├── mlp_classifier_vis.py
     │           └── rcnn_classifier_vis.py
-    └── report_latex  <- Latex Tools for report
-    └── Report.pdf    <- Report
+    └── report_latex                                <- Latex Tools for report
+    └── Report_24200046.pdf                         <- Final Report
 --------
 
