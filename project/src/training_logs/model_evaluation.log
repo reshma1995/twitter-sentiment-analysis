@@ -1,0 +1,7 @@
+                    Model  Angry P  Angry R  Angry F1  Disappointed P  Disappointed R  Disappointed F1  Happy P  Happy R  Happy F1  Accuracy %
+           MLP-Classifier    72.18    79.06     75.46           70.04           64.85            67.35    79.49    77.97     78.72       73.87
+                CNN-Model    81.80    90.64     85.99           88.67           83.13            85.81    96.72    92.48     94.55       88.70
+     LSTM-Text-Classifier    82.51    90.31     86.23           87.89           84.90            86.37    98.68    92.81     95.65       89.30
+LSTM-Multi-Head-Attention    82.43    91.25     86.62           88.67           84.44            86.50    98.31    92.61     95.37       89.39
+     RCNN-Text-Classifier    83.06    92.39     87.47           90.75           85.61            88.10    99.02    93.66     96.27       90.51
+ BiGRU-Attention-Residual    82.97    90.78     86.70           88.81           85.46            87.10    98.63    93.16     95.82       89.76

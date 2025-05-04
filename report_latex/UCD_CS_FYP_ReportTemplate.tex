@@ -27,6 +27,9 @@
 \usepackage{microtype}      % microtypography
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+
 
 \title{Emotion Recognition: Sentiment Analysis on Twitter Using Advanced Neural Network Architectures}
 
@@ -40,7 +43,7 @@
 
 
 \author{%
-  Reshma Jasmine Dsouza\thanks{Student at University College Dublin. MSc. Computer Science Negotiated Learning. Student ID 24200046} \\
+  Reshma Jasmine D'souza\thanks{Student at University College Dublin. MSc. Computer Science Negotiated Learning. Student ID 24200046} \\
   Department of Computer Science\\
   University College Dublin\\
   Dublin, Ireland \\
@@ -102,7 +105,7 @@ The Recurrent Convolutional Neural Network (RCNN) has emerged as a hybrid soluti
 
 The refinement of LSTM models into bidirectional versions (BiLSTMs) enabled the analysis of
 context from both past and future inputs symmetrically, which significantly enhanced the under-
-standing of contextual nuances in sentiment analysis (Schuster and Paliwal, 1997)[7]. The subsequent
+standing of contextual nuances in sentiment analysis (Schuster and Paliwal, 1997)[6]. The subsequent
 integration of attention mechanisms with BiLSTMs marked a significant innovation, allowing models
 to concentrate on specific text segments that are particularly informative for sentiment analysis. This
 focus notably improved both the accuracy and interpretability of the analysis results (Bahdanau et al.,
@@ -129,6 +132,22 @@ Sentiment analysis on tweets presents unique difficulties due to several factors
 \item \textbf{Irregular Grammar and Syntax:} Tweet content often strays from conventional grammar rules, featuring unusual punctuation, capitalisation, and sentence structures.
 \item \textbf{Use of Slang and Abbreviations:} Twitter users frequently employ slang, shorthand, and acronyms that are uncommon in standard language corpora.
 \end{itemize}
+
+\begin{table}[h]
+  \caption{Dataset Distribution}
+  \label{sample-table}
+  \centering
+  \begin{tabular}{lrrrr}
+    \toprule
+    Category & Disappointed & Angry & Happy & Total \\
+    \midrule
+    TRAIN    & 219{,}864    & 210{,}280 & 211{,}458 & 641{,}602 \\
+    VALID    & 46{,}830     & 45{,}402  & 45{,}254  & 137{,}486 \\
+    TEST     & 47{,}020     & 45{,}308  & 45{,}159  & 137{,}487 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 
 \subsection{Data Pre-processing}
 Pre-processing textual data plays a vital role in the sentiment analysis pipeline, especially when working with informal and unstructured content like tweets. Due to the distinctive nature of Twitter data, marked by its brevity and lack of grammatical consistency a strong pre-processing approach is essential for accurately identifying sentiments or emotions. This section describes the data collection and pre-processing techniques used in this study. Given the nature of Twitter data, our pre-processing approach involves several techniques designed to standardise and clarify the text for analysis:
@@ -678,7 +697,168 @@ g_t &:\ \text{Gradient at time step } t \\
 \]
 This adaptive learning strategy enhances convergence and is particularly effective in managing the sparse and noisy nature of Twitter data.
 
-\section*{References}
+
+\section{Results}
+
+\begin{table}[H]
+\centering
+\caption{Performance Metrics of Models on Sentiment Classes}
+\label{tab:model-performance}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lccccccccccc}
+\toprule
+\textbf{Model} & \textbf{Angry P} & \textbf{Angry R} & \textbf{Angry F1} &
+\textbf{Disap. P} & \textbf{Disap. R} & \textbf{Disap. F1} &
+\textbf{Happy P} & \textbf{Happy R} & \textbf{Happy F1} & 
+\textbf{Accuracy (\%)} \\
+\midrule
+MLP          & 72.18 & 79.06 & 75.46 & 70.04 & 64.85 & 67.35 & 79.49 & 77.97 & 78.72 & 73.87 \\
+CNN          & 81.80 & 90.64 & 85.99 & 88.67 & 83.13 & 85.81 & 96.72 & 92.48 & 94.55 & 88.70 \\
+BiLSTM       & 82.51 & 90.31 & 86.23 & 87.89 & 84.90 & 86.37 & 98.68 & 92.81 & 95.65 & 89.30 \\
+BiLSTM-MHAT  & 82.43 & 91.25 & 86.62 & 88.67 & 84.44 & 86.50 & 98.31 & 92.61 & 95.37 & 89.39 \\
+RCNN         & 83.06 & 92.39 & 87.47 & 90.75 & 85.61 & 88.10 & 99.02 & 93.66 & 96.27 & 90.51 \\
+BiGRU-AR     & 82.97 & 90.78 & 86.70 & 88.81 & 85.46 & 87.10 & 98.63 & 93.16 & 95.82 & 89.76 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+The MLP model, being a fully connected feed-forward neural network, performs the weakest across all metrics. It achieves an accuracy of 73.87\% with relatively low F1-scores for all emotion classes (Angry F1: 75.46, Disappointed F1: 67.35, Happy F1: 78.72). MLP's poor performance can be attributed to its inability to capture the sequential and contextual nature of language data, especially the informal and varied structure of tweets. It treats input as fixed-size vectors and lacks any temporal understanding, making it less suitable for text-based tasks where context matters.
+
+CNN shows a significant improvement with an accuracy of 88.70\%. It performs well across all classes, particularly Happy (F1: 94.55) and Angry (F1: 85.99). CNNs are effective at capturing local n-gram features and short-range dependencies, which is advantageous for Twitter data where expressions are brief and often sentiment-rich. However, CNN still falls short in capturing long-term dependencies, slightly affecting its recall for complex classes like Disappointed.
+
+The BiLSTM architecture boosts performance further, achieving an accuracy of 89.30\%, with consistently high F1-scores across all emotion classes. The ability of BiLSTM to process information in both forward and backward directions allows it to understand context from both past and future tokens, making it better suited to handle the variable structure and implicit sentiment of tweets. Notably, it improves Disappointed F1 to 86.37 and Happy F1 to 95.65, indicating stronger emotional nuance capture.
+
+By integrating Multi-Head Attention with BiLSTM, this model slightly improves performance to an accuracy of 89.39\%. Attention mechanisms help the model focus on the most sentiment-relevant parts of the input, enabling better generalisation, especially for subtle cues in the Disappointed class (F1: 86.50). The small performance gain over plain BiLSTM suggests that while attention is beneficial, its impact may be marginal when BiLSTM already performs strongly.
+
+RCNN achieves the highest performance overall, with an accuracy of 90.51\%. It combines the benefits of both CNN (for capturing local features) and RNN (for modelling sequential dependencies), allowing it to learn richer and more contextual representations. It records the best F1-scores in all three emotion classes, especially Happy (F1: 96.27) and Disappointed (F1: 88.10). This indicates the model's robustness in identifying both explicit and implicit emotional cues.
+
+BiGRU-AR also performs very well, with an accuracy of 89.76\%. Its performance is close to RCNN, showing strong F1-scores across the board. GRU units, being simpler than LSTM but still effective at handling sequences, along with attention and residual connections, likely contribute to its efficiency and stability during training. It also handles subtle sentiments well (e.g., Disappointed F1: 87.10, Happy F1: 95.82).
+
+Comparative Analysis:
+\begin{itemize}
+\item MLP, lacking sequential modelling, falls far behind.
+\item CNN performs well due to local pattern detection but lacks contextual depth.
+\item BiLSTM improves significantly by capturing bidirectional dependencies.
+\item BiLSTM-MHAT leverages attention for focused learning but offers only slight gains over BiLSTM.
+\item RCNN leads due to its hybrid approach, combining local and contextual understanding effectively.
+\item BiGRU-AR offers a strong alternative with nearly equivalent performance, benefiting from architectural efficiency and attention.
+\end{itemize}
+
+\section{Conclusion and Future Work}
+
+Overall, the RCNN model emerges as the most effective, outperforming others in nearly every metric. Its hybrid design allows it to extract and contextualise emotional patterns more effectively than models relying solely on sequential or convolutional mechanisms. BiGRU-AR is a close second, offering a strong balance between performance and model complexity. The BiLSTM variants, especially with attention, also show robust results. For future deployment in sentiment analysis of tweets, architectures that combine both local and sequential features, possibly with attention mechanisms are ideal for handling the noisy, short, and emotionally rich nature of Twitter data.
+
+Comparative confusion matrices for different neural network architectures used in sentiment
+analysis of Twitter data:
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{CNN_Modelconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for CNN Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{MLP_Classifierconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for MLP Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{LSTM_Text_Classifierconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for BiLSTM Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{LSTM_Multi_Head_Attentionconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for BiLSTM-MHAM Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{RCNN_Text_Classifierconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for RCNN Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{BiGRU_Attention_Residualconfusion_matrix_cnn.png}
+    \caption{Confusion Matrix for BiGRU-AR Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+
+Training vs Validation loss for different models used in the study:
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{cnn_loss_curve.png}
+    \caption{Training vs Validation Loss - CNN Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{mlp_loss_curve.png}
+    \caption{Training vs Validation Loss - MLP Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{lstm_tc_loss_curve.png}
+    \caption{Training vs Validation Loss - BiLSTM Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{lstm_ma_loss_curve.png}
+    \caption{Training vs Validation Loss - BiLSTM-MHAM Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{rcnn_loss_curve.png}
+    \caption{Training vs Validation Loss - RCNN Model}
+    \label{fig:image1}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{bigru_loss_curve.png}
+    \caption{Training vs Validation Loss - BiGRU Attention Residual Model}
+    \label{fig:image2}
+  \end{minipage}
+\end{figure}
+
+Future research in tweet-based sentiment analysis can branch into several impactful directions to enhance accuracy, robustness, and applicability. One promising area is domain-adaptive pre-training, where models are pre-trained specifically on large volumes of Twitter or social media text. Since general-purpose language models often struggle with informal and abbreviated language, this approach can help the model better understand the unique linguistic features of tweets, such as slang, emojis, and non-standard grammar.
+
+Another key area is multilingual and code-mixed sentiment analysis. Twitter is used globally, and many users tweet in languages other than English or mix languages within a single tweet (e.g., Hinglish). Building models that can handle such linguistic diversity would significantly broaden the utility of sentiment analysis tools. This can be achieved through multilingual embeddings or transformer-based models trained on diverse linguistic datasets.
+
+There is also great potential in temporal sentiment tracking, where models can analyse how public sentiment evolves over time, particularly around events like political debates, product releases, or crises. Incorporating time-aware features or using sequential models conditioned on timestamps can provide valuable insights for trend analysis and forecasting.
+
+Finally, incorporating multimodal information, such as images, hashtags, or user metadata that can lead to richer sentiment analysis. Tweets often rely on visual context or user-specific information to convey sentiment fully. Developing models that integrate both text and non-textual data (e.g., using image-text fusion techniques) can provide a more holistic understanding of sentiment.
+
+\section{References}
 
 \small
 [1] Thumbs up? Sentiment Classification using Machine Learning Techniques(https://aclanthology.org/W02-1011) (Pang et al., EMNLP 2002)
@@ -693,10 +873,16 @@ Conference on Empirical Methods in Natural Language Processing (EMNLP), Doha, 17
 
 [5] Hochreiter, S. and Schmidhuber, J. (1997) Long Short-Term Memory. Neural Computation, 9, 1735-1780. https://doi.org/10.1162/neco.1997.9.8.1735
 
-[7] M. Schuster and K. K. Paliwal, "Bidirectional recurrent neural networks," in IEEE Transactions on Signal Processing, vol. 45, no. 11, pp. 2673-2681, Nov. 1997, doi: 10.1109/78.650093. keywords: Recurrent neural networks;Artificial neural networks;Training data;Databases;Probability;Shape;Parameter estimation;Speechrecognition;Control systems;Telecommunication control,
+[6] M. Schuster and K. K. Paliwal, "Bidirectional recurrent neural networks," in IEEE Transactions on Signal Processing, vol. 45, no. 11, pp. 2673-2681, Nov. 1997, doi: 10.1109/78.650093. keywords: Recurrent neural networks;Artificial neural networks;Training data;Databases;Probability;Shape;Parameter estimation;Speechrecognition;Control systems;Telecommunication control,
+
+[7] Li, Xu, Tianxuan Hao, Fan Li, Lizhen Zhao, and Zehua Wang. 2023. "Faster R-CNN-LSTM Construction Site Unsafe Behavior Recognition Model" Applied Sciences 13, no. 19: 10700. https://doi.org/10.3390/app131910700
 
 [8] Dzmitry Bahdanau, KyunghyunCho, and Yoshua Bengio. 2015. Neural machine translation by jointly
 learning to align and translate. In ICLR.
+
+[9] Kumar, A., Sachdeva, N. A Bi-GRU with attention and CapsNet hybrid model for cyberbullying detection on social media. World Wide Web 25, 1537–1550 (2022). https://doi.org/10.1007/s11280-021-00920-4
+
+[10] Pustokhin, D. A., Pustokhina, I. V., Dinh, P. N., Phan, S. V., Nguyen, G. N., Joshi, G. P., and K., S. (2020). An effective deep residual network based class attention layer with bidirectional LSTM for diagnosis and classification of COVID-19. Journal of Applied Statistics, 50(3), 477–494. https://doi.org/10.1080/02664763.2020.1849057
 
 
 

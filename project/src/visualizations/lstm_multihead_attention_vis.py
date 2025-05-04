@@ -88,7 +88,12 @@ EarlyStopping counter: 3 out of 3
 Early stopping
 """
 
-# Extracted values from the training log
+import os
+
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
+plot_path = os.path.join(save_dir, "lstm_ma_loss_curve.png")
+
 epochs = list(range(1, 40))
 train_loss = [
     1.098408, 1.098351, 1.098257, 1.097760, 1.090541, 1.046662, 0.928236, 0.834445, 0.741532,
@@ -114,4 +119,4 @@ plt.title('Training Loss vs Validation Loss (LSTM Multi Head Attention)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 

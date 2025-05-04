@@ -90,8 +90,12 @@ Early stopping
 
 ==========Best Accuracy After training================ 89.8590087890625
 """
+import os
 
-# Data for the sixth training log
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
+plot_path = os.path.join(save_dir, "bigru_loss_curve.png")
+
 epochs = list(range(1, 40))
 train_loss = [
     0.700583, 0.588294, 0.558299, 0.529903, 0.497885, 0.459612, 0.421157, 0.391543, 0.371066,
@@ -118,4 +122,4 @@ plt.title('Training Loss vs Validation Loss (Sixth Training Run)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 

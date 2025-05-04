@@ -62,7 +62,11 @@ Early stopping
 
 ==========Best Accuracy After training================ 73.95825958251953
 """
+import os
 
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
+plot_path = os.path.join(save_dir, "mlp_loss_curve.png")
 epochs = list(range(1, 26))
 train_loss = [
     0.914106, 0.777409, 0.730325, 0.703493, 0.683936, 0.669068, 0.656966, 0.645865, 0.636981,
@@ -85,4 +89,4 @@ plt.title('Training Loss vs Validation Loss (MLP Classifier)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 
