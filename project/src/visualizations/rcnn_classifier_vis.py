@@ -111,7 +111,11 @@ Validation loss decreased (0.220048 --> 0.219894).  Saving model ...
 ==========Best Accuracy After training================ 90.60465240478516
 
 """
+import os
 
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
+plot_path = os.path.join(save_dir, "rcnn_loss_curve.png")
 
 epochs = list(range(1, 51))
 train_loss = [
@@ -141,4 +145,4 @@ plt.title('Training Loss vs Validation Loss (RCNN - LSTM + CNN)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 

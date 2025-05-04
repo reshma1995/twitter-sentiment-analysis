@@ -35,6 +35,7 @@ Early stopping
 ==========Best Accuracy After training================ 88.79215240478516
 
 """
+import os 
 
 epochs = list(range(1, 12))
 train_loss = [
@@ -45,8 +46,10 @@ val_loss = [
     0.537215, 0.445877, 0.370125, 0.323019, 0.299926, 0.284685,
     0.275670, 0.273548, 0.270748, 0.271374, 0.273041
 ]
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
 
-# Plotting
+plot_path = os.path.join(save_dir, "cnn_loss_curve.png")
 plt.figure(figsize=(10, 6))
 plt.plot(epochs, train_loss, label='Training Loss')
 plt.plot(epochs, val_loss, label='Validation Loss')
@@ -56,5 +59,5 @@ plt.title('Training Loss vs Validation Loss (CNN Model)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 
 

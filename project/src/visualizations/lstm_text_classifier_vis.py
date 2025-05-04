@@ -110,6 +110,11 @@ Validation loss decreased (0.267453 --> 0.266456).  Saving model ...
 
 ==========Best Accuracy After training================ 89.1438980102539
 """
+import os
+
+save_dir = "reports/figures"
+os.makedirs(save_dir, exist_ok=True)
+plot_path = os.path.join(save_dir, "lstm_tc_loss_curve.png")
 
 epochs = list(range(1, 51))
 train_loss = [
@@ -138,5 +143,5 @@ plt.title('Train Loss vs Validation Loss (Third Training Run)')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+plt.savefig(plot_path, dpi=300) 
 
