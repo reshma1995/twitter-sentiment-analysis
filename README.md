@@ -1,5 +1,7 @@
 # Twitter Sentiment Anaylsis
 
+The whole project can be found here: https://github.com/reshma1995/twitter-sentiment-analysis
+
 This README provides clear instructions on how to install dependencies, how to run different components of the project, and how to contribute to the project, tailored for users familiar with GitHub projects.
 
 - This project applies deep learning techniques to analyze sentiments expressed in tweets. 
@@ -60,10 +62,30 @@ conda activate myenv
 conda install pip
 pip install -r requirements.txt
 ```
+## Where to place Dataset?
+
+- Place the dataset with the name dataset(clean).csv under this folder "project/src/dataset/raw/" and run the load dataset command in the respective section to get the cleaned tweets and split_data
+- You will have to create the mentioned folder and place the dataset in it.
+
+## IMPORTANT PRE-REQUISIT!!!: Before Running Models Have To Be Available In the Respective Folders
+- Setup the repo
+```bash
+cd project/
+```
+```bash
+python -m pip install gdown 
+```
+```bash
+python setup.py
+```
+Note: This setup is required to pull some models which are trained and not available as a part of the submission due to size restrictions.
+Trained models are available here: https://drive.google.com/drive/folders/1RbIK8MirRCe0Z4lCzW2oFCqhiFdKAexJ?usp=drive_link
+
+- Alternatively you can download the models from the above google drive link and place them in the folder "project/src/models"
 
 - Navigate to the src directory before running any commands to test the project
 ```bash
-cd project/src/
+cd src/
 ```
 
 ### Load and Clean the dataset:
@@ -96,10 +118,26 @@ The following are the available model_name arguments:
 
 - Run the following command from inside the src folder:
 ```bash
- python -m src.main --model_name MLP_Classifier --infer-model
+ python -m main --model_name MLP_Classifier --infer-model
 ```
 - Replace the model name with the model inference you want to visualize. 
 - The model_name will have the same name as the one you trained.
+- To obtain the precision/recall/F1 score for the test set of tweets for different emotions and different models, run:
+```bash
+ python classification_table.py
+```
+
+### Predict using a model:
+```bash
+ python -m main --predict
+```
+Model names to use during prediction
+- "CNN" for CNN Model
+- "MLP" for MLP Classifier 
+- "LSTM" for BiLSTM Model
+- "LSTM2" for BiLSTM Multi Head Attention
+- "RCNN" for RCNN
+- "BiGRU" for BiGRU Attention Residual
 
 ## Project Organization
 ------------
@@ -127,7 +165,10 @@ The following are the available model_name arguments:
     │       │   └── hyperparams.yaml        <- H Params
     │       ├── dataset
     │       │   ├── processed               <- The final, canonical data sets for modeling.
+    │       │   │   ├── cleaned_tweets.csv
+    │       │   │   └── split_data.json
     │       │   └── raw                     <- The original, immutable data dump.
+    │       │       └── dataset(clean).csv
     │       ├── main.py                     <- Entrypoint
     │       ├── models                      <- Models trained for 50 Epochs or Early Stopping
     │       │   ├── BiGRU_Attention_Residual
@@ -175,7 +216,6 @@ The following are the available model_name arguments:
     │           ├── lstm_text_classifier_vis.py
     │           ├── mlp_classifier_vis.py
     │           └── rcnn_classifier_vis.py
-    └── report_latex                                <- Latex Tools for report
     └── Report_24200046.pdf                         <- Final Report
 --------
 

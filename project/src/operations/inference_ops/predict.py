@@ -8,6 +8,7 @@ from operations.model_ops.lstm_text_classifier import LSTM_Text_Classifier
 from operations.model_ops.mlp_classifier import MLP_Classifier
 from operations.dataset_ops.dataset_ops import CleanTweets
 from operations.model_ops.bigru_attention_residuals import BiGRU_Attention_Residual
+from operations.model_ops.rcnn_text_classifier import RCNN_Text_Classifier
 
 def predict(input_text, model):
     input_text = [input_text]
@@ -29,6 +30,11 @@ def predict(input_text, model):
         model_params['vocab_size'] = vocab_size
         model = CNN_Model(**model_params)
         model.load_state_dict(torch.load(f'{MODEL_SAVE_PATH}/CNN_Model'))
+    elif model == 'RCNN':
+        model_params = read_config_file(CONFIG_PARAMS_FILEPATH, 'RCNN_Text_Classifier')
+        model_params['vocab_size'] = vocab_size
+        model = RCNN_Text_Classifier(**model_params)
+        model.load_state_dict(torch.load(f'{MODEL_SAVE_PATH}/RCNN_Text_Classifier'))
     elif model == 'LSTM':
         model_params = read_config_file(CONFIG_PARAMS_FILEPATH, 'LSTM_Text_Classifier')
         model_params['vocab_size'] = vocab_size

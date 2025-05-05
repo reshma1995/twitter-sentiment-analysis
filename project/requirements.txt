@@ -272,3 +272,5 @@ ypy-websocket>=0.8.2
 zipp>=3.17.0
 zlib-ng
 zstd
+GitPython
+gdown
